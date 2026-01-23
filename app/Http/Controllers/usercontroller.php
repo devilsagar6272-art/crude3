@@ -1,12 +1,11 @@
 <?php
-
 namespace App\Http\Controllers;
 use App\Models\usermodel;
 use Illuminate\Http\Request;
 class usercontroller extends Controller
 {
   public function insert(Request $request)
-  {
+  { 
     $data = usermodel::create([
         'name' => $request->name, 
         'email' => $request->email

@@ -15,8 +15,11 @@ use App\Http\Controllers\usercontroller;
 Route::get('/', function (){
     return view('insert');
 });
-Route::post('/insert',[usercontroller::class,'insert']);
-Route::get('/delete/{id}',[usercontroller::class,'delete']);
-Route::get('/userdata',[usercontroller::class,'display']);
-Route::get('/edit/{id}',[usercontroller::class,'edit']);
-Route::post('/update/{id}',[usercontroller::class,'update']);
+Route::controller(usercontroller::class)->group(function(){
+Route::post('/insert','insert');
+Route::get('/delete/{id}','delete');
+Route::get('/userdata','display');
+Route::get('/edit/{id}','edit');
+Route::post('/update/{id}','update')->name('update');
+});
+
