@@ -6,11 +6,28 @@ class usercontroller extends Controller
 {
   public function insert(Request $request)
   { 
+    $request->validate([
+     'name' => 'required',
+     'email' => 'required|email'
+    ]);
+    $user = usermodel::where('email',$request->email)->exists();
+    if($user)
+      { 
+         return response()->json(['message' => 'record alrady exist']);
+      }
+    else
+      {
+     if($request->hasFile('image'));
+    { 
+      $path = $request->file('image')->store('uploads','public');
+    }
     $data = usermodel::create([
         'name' => $request->name, 
-        'email' => $request->email
+        'email' => $request->email,
+        'image' => $path
     ]);
    return response()->json(true);
+   }
   }
   public function delete($id)
   {
@@ -19,7 +36,7 @@ class usercontroller extends Controller
   }   
   function display()
   {
-     $user = usermodel::all();
+    $user = usermodel::all();
     return response()->json($user); 
   }
   function edit($id)
