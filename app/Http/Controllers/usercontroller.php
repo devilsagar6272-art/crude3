@@ -62,7 +62,7 @@ class usercontroller extends Controller
         return response()->json(['success' => "1"]);
       }
       else
-     {   
+     {  
         $path = $request->file('edit_image')->store('uploads','public');
         $data = usermodel::where('id',$id)->update([
         'name' => $request ->edit_name, 
