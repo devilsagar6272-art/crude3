@@ -4,6 +4,12 @@ use App\Models\usermodel;
 use Illuminate\Http\Request;
 class usercontroller extends Controller
 {
+  public function index() {
+    $data = usermodel::select("id","name","email")->get();
+    return response()->json([
+      "data" => $data
+    ]);
+  }
   public function insert(Request $request)
   { 
     $request->validate([
@@ -12,14 +18,14 @@ class usercontroller extends Controller
     ]);
     $user = usermodel::where('email',$request->email)->exists();
     if($user)
-      { 
-         return response()->json(['message' => 'record alrady exist']);
-      }
-    else
-      {
-     if($request->hasFile('image'));
     { 
-      $path = $request->file('image')->store('uploads','public');
+      return response()->json(['message' => 'record already exist']);
+    }
+    else
+    {
+    if($request->hasFile('image'));
+    {
+      $path = $request->file('image')->store('uploads','public'); 
     }
     $data = usermodel::create([
         'name' => $request->name, 
@@ -46,10 +52,24 @@ class usercontroller extends Controller
   }
   public function update(Request $request,$id)
   {
-    $data = usermodel::where('id',$id)->update([
-        'name' => $request ->name, 
-        'email' => $request->email
+    $request->validate([
+      'edit_name' => "required",
+      'edit_email' => "required|email"
+    ]);
+    $user =usermodel::where('email',$request->edit_email)->exists();
+    if($user)
+      {
+        return response()->json(['success' => "1"]);
+      }
+      else
+     {   
+        $path = $request->file('edit_image')->store('uploads','public');
+        $data = usermodel::where('id',$id)->update([
+        'name' => $request ->edit_name, 
+        'email' => $request->edit_email,
+        'image' => $path
     ]);
    return response()->json(true);
+   }
   } 
 }
