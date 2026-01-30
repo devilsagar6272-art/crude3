@@ -5,27 +5,21 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
-<body class="bg-light">
+<body class="bg-grey">
 <div class="container mt-4">
     <h3 class="mb-3">User Form</h3>
     <form id="myform" enctype="multipart/form-data" class="card p-3 mb-4">
         <input type="text" class="form-control mb-2" name="name" placeholder="Enter Name">
         <span class="text-danger" id="errors_name"></span>
-
         <input type="email" class="form-control mb-2" name="email" placeholder="Enter Email">
         <span class="text-danger" id="errors_email"></span>
-
         <input type="file" class="form-control mb-2" name="image">
-
         <button type="submit" class="btn btn-primary">Save</button>
     </form>
     <table class="table table-bordered">
@@ -49,15 +43,10 @@
       </div>
       <form id="myeditform" enctype="multipart/form-data">
       <div class="modal-body">
-
         <input type="hidden" name="user_id" id="user_id">
-
         <input type="text" class="form-control mb-2" name="edit_name" id="edit_name">
-
         <input type="email" class="form-control mb-2" name="edit_email" id="edit_email">
-
         <input type="file" class="form-control mb-2" name="edit_image">
-
       </div>
       <div class="modal-footer">
         <button type="submit" class="btn btn-success">Update</button>

@@ -11,7 +11,8 @@ use App\Http\Controllers\usercontroller;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function (){
+Route::get('/', function ()
+{
     return view('insert');
 });
 Route::controller(usercontroller::class)->group(function(){
@@ -21,5 +22,6 @@ Route::get('/userdata','display');
 Route::get('/edit/{id}','edit');
 Route::post('/update/{id}','update')->name('update');
 Route::get("/users", "index");
+Route::get("/sagar", "sagar");
 });
 

@@ -72,4 +72,7 @@ class usercontroller extends Controller
    return response()->json(true);
    }
   } 
+  function sagar(){
+    return view('insert2');
+  }
 }
